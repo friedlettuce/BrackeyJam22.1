@@ -3,7 +3,7 @@ using UnityEngine;
 public class CityManager : MonoBehaviour
 {
     [Header ("Population")]
-    [SerializeField] private int population;
+    [SerializeField] public int population { get; private set; }
     
     [Header ("Happiness")]
     [SerializeField] private int happiness;
@@ -12,9 +12,13 @@ public class CityManager : MonoBehaviour
     [SerializeField] private int lowerLimit;
     [SerializeField] private int upperLimit;
 
+    [Header ("Inventory")]
+    [SerializeField] private Inventory vr;
+    [SerializeField] private int pcMultiplier;
+
     public bool WillBuy(){
         int pH = Mathf.Clamp(happiness + Random.Range(-personalRange, personalRange), lowerLimit, upperLimit);
-        return pH > happiness;
+        return vr.ads + vr.costPriceRatio() * pcMultiplier;
     }
     public int GenHappy(int previous){
         int range_l = previous > lowerLimit + range ? range : previous  - lowerLimit;

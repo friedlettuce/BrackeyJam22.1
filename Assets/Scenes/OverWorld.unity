@@ -154,9 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   population: 200
   happiness: 50
+  personalRange: 20
   range: 20
   lowerLimit: 20
   upperLimit: 80
+  vr: {fileID: 1603429169}
 --- !u!4 &429646981
 Transform:
   m_ObjectHideFlags: 0
@@ -370,8 +372,8 @@ MonoBehaviour:
   software: 0
   ads: 0
   servers: 0
-  money: 0
-  price: 0
+  money: 100
+  price: 30
   user_base: 0
 --- !u!4 &1603429170
 Transform:
