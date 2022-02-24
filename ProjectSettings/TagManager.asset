@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - UIText
+  - Door
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: Buildings
     uniqueID: 1114965035
+    locked: 0
+  - name: Character
+    uniqueID: 2001226837
     locked: 0

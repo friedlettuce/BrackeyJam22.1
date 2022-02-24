@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Population : MonoBehaviour
 {   
+    [Header ("Population")]
+    [SerializeField] private GameObject[] consumers;
+
     [Header ("Happiness")]
     [SerializeField] private int happiness;
     [SerializeField] private int personalRange;
@@ -15,6 +18,15 @@ public class Population : MonoBehaviour
     [SerializeField] private float cpBuyMult;
     private int pH;
 
+    public void SetPopulation(int population){
+        if(population < 0) population = 0;
+        Debug.Log(population);
+        consumers = new GameObject[population];
+        for(int i = 0; i < population; ++i){
+            consumers[i] = new GameObject();
+            consumers[i].transform.parent = transform;
+        }
+    }
     public bool WillBuy(float cpr, float adsr){
         pH = Mathf.Clamp(happiness + Random.Range(-personalRange, personalRange), lowerLimit, upperLimit);
         float chance = cpr * cpBuyMult + (1 - pH / upperLimit) * happyBuyMult + adsr * adsBuyMult;
