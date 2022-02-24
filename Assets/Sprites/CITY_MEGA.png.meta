@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: 846f12ec92582b14eb022181c91489f1
+guid: eacc8f6df473aed4386cea5f6ac2784c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5707218116961789024
-    second: player_room
+      213: 5344816431498506827
+    second: health_centre
   - first:
-      213: 3556181715638617739
-    second: time
+      213: 6166409426572008379
+    second: blue_building
   - first:
-      213: -8816031292267695619
-    second: options
+      213: 4718150572076898518
+    second: nyan_sushi
   - first:
-      213: 7263181891274304025
-    second: dialogue
+      213: 8463214869106870600
+    second: green_building
+  - first:
+      213: 1605430129174068870
+    second: CITY_MEGA_4
+  - first:
+      213: -1919303344368975698
+    second: CITY_MEGA_5
+  - first:
+      213: -7571942010979092369
+    second: sidewalk
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +124,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_room
+      name: health_centre
       rect:
         serializedVersion: 2
-        x: 216
-        y: 0
-        width: 168
-        height: 216
+        x: 104
+        y: 959
+        width: 161
+        height: 154
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0646e25a3ac143f40800000000000000
-      internalID: 5707218116961789024
+      spriteID: b42b325f93a9c2a40800000000000000
+      internalID: 5344816431498506827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: time
+      name: blue_building
       rect:
         serializedVersion: 2
-        x: 0
-        y: 156
-        width: 224
-        height: 60
+        x: 386
+        y: 960
+        width: 122
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b86016dcd681a5130800000000000000
-      internalID: 3556181715638617739
+      spriteID: bbbd172d3bc739550800000000000000
+      internalID: 6166409426572008379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: options
+      name: nyan_sushi
       rect:
         serializedVersion: 2
-        x: 0
-        y: 72
-        width: 224
-        height: 92
+        x: 517
+        y: 959
+        width: 106
+        height: 178
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df1f7afbf3a27a580800000000000000
-      internalID: -8816031292267695619
+      spriteID: 6d8137d82fc3a7140800000000000000
+      internalID: 4718150572076898518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dialogue
+      name: green_building
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 224
-        height: 80
+        x: 644
+        y: 959
+        width: 104
+        height: 222
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91a6478b2710cc460800000000000000
-      internalID: 7263181891274304025
+      spriteID: 8494bea5511637570800000000000000
+      internalID: 8463214869106870600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CITY_MEGA_4
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 943
+        width: 923
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68e31215232a74610800000000000000
+      internalID: 1605430129174068870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CITY_MEGA_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 943
+        width: 268
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea00ba6f6c34d55e0800000000000000
+      internalID: -1919303344368975698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sidewalk
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 943
+        width: 482
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68fbbfdbde0be690800000000000000
+      internalID: -7571942010979092369
       vertices: []
       indices: 
       edges: []
