@@ -2,27 +2,39 @@ using UnityEngine;
 
 public class CityManager : MonoBehaviour
 {
+    [Header ("Time")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private Color dayColor;
+    [SerializeField] private Color nightColor;
+    private int day;
+    private int hour;
+    private int minute;
+    private float t;
+
     [Header ("Population")]
-    [SerializeField] public int population { get; private set; }
-    
-    [Header ("Happiness")]
-    [SerializeField] private int happiness;
-    [SerializeField] private int personalRange;
-    [SerializeField] private int range;
-    [SerializeField] private int lowerLimit;
-    [SerializeField] private int upperLimit;
+    [SerializeField] private int population;
 
-    [Header ("Inventory")]
+    [Header ("References")]
     [SerializeField] private Inventory vr;
-    [SerializeField] private int pcMultiplier;
+    private Population popManager; 
 
-    public bool WillBuy(){
-        int pH = Mathf.Clamp(happiness + Random.Range(-personalRange, personalRange), lowerLimit, upperLimit);
-        return vr.ads + vr.costPriceRatio() * pcMultiplier;
+    private void Awake(){
+        day = 1;
+        hour = 8;
+        minute = 0;
+        popManager = GetComponentInChildren<Population>();
+        InvokeRepeating(nameof(incrementTime), 1f, .01f);
     }
-    public int GenHappy(int previous){
-        int range_l = previous > lowerLimit + range ? range : previous  - lowerLimit;
-        int range_r = previous < upperLimit - range ? range : upperLimit - previous;
-        return Random.Range(previous - range_l, previous + range_r);
+    private void incrementTime(){
+        if(minute++ >= 59){
+            ++hour;
+            minute = 0;
+        }
+        if(hour >= 23){
+            ++day;
+            hour = 0;
+        }
+        t = ((hour > 11 ? 23 - hour : hour) - 5) / 11f;
+        cam.backgroundColor = Color.Lerp(nightColor, dayColor, hour > 5 ? t : 0f);
     }
 }
