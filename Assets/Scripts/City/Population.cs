@@ -19,7 +19,9 @@ public class Population : MonoBehaviour
     [SerializeField] private float happyBuyMult;
     [SerializeField] private float adsBuyMult;
     [SerializeField] private float cpBuyMult;
-    private int pH;
+
+    [Header ("References")]
+    [SerializeField] private Inventory inventory;
 
     public void SpawnConsumer(){
         bool dir = Random.value >= 0.5f;
@@ -39,6 +41,22 @@ public class Population : MonoBehaviour
         }
         return 0;
     }
+    public void incrementHappy(){
+        happiness = Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
+    }
+    public float HappyValue(){
+        return Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
+    }
+    public bool WillBuy(float _happiness){
+        return Random.Range(1, 101) <= inventory.costPriceRatio() * cpBuyMult + (
+            1 - _happiness / upperLimit) * happyBuyMult + inventory.adsRatio() * adsBuyMult;
+    }
+    public bool cprOrHappy(float _happiness){
+        return inventory.costPriceRatio() / cpBuyMult < (1 - _happiness / upperLimit) / happyBuyMult;
+    }
+    public bool Enjoyed(float experience, float _happiness){
+        return experience > _happiness;
+    }
     public void SetPopulation(int population){
         population += 5;
         if(population < 0) population = 0;
@@ -50,16 +68,5 @@ public class Population : MonoBehaviour
             consumers[i].transform.parent = transform;
             consumers[i].SetActive(false);
         }
-    }
-    public bool WillBuy(float cpr, float adsr){
-        pH = Mathf.Clamp(happiness + Random.Range(-personalRange, personalRange), lowerLimit, upperLimit);
-        float chance = cpr * cpBuyMult + (1 - pH / upperLimit) * happyBuyMult + adsr * adsBuyMult;
-        return Random.Range(1, 100) <= chance;
-    }
-    public bool Enjoyed(float experience){
-        return experience > pH;
-    }
-    public void incrementHappy(){
-        happiness = Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
     }
 }

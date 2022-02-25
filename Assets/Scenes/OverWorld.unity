@@ -495,14 +495,15 @@ MonoBehaviour:
   consumerPrefab: {fileID: 999965821928259421, guid: 69edef68b16d1934082ae305613b4a7d, type: 3}
   leftSpawn: {fileID: 65132509}
   rightSpawn: {fileID: 1500499040}
-  happiness: 0
-  personalRange: 0
-  range: 0
-  lowerLimit: 0
-  upperLimit: 0
-  happyBuyMult: 0
-  adsBuyMult: 0
-  cpBuyMult: 0
+  happiness: 50
+  personalRange: 20
+  range: 20
+  lowerLimit: 20
+  upperLimit: 80
+  happyBuyMult: 40
+  adsBuyMult: 20
+  cpBuyMult: 40
+  inventory: {fileID: 1603429169}
 --- !u!4 &429646981
 Transform:
   m_ObjectHideFlags: 0
@@ -1173,7 +1174,6 @@ MonoBehaviour:
   dayColor: {r: 1, g: 1, b: 1, a: 1}
   nightColor: {r: 0, g: 0, b: 0, a: 1}
   population: 10
-  vr: {fileID: 1603429169}
   popManager: {fileID: 429646980}
 --- !u!4 &1142352796
 Transform:
@@ -1443,19 +1443,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa8009e2f25d884ea2c2c78d9836b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hardware: 0
-  software: 0
-  ads: 0
-  servers: 0
-  hardwareLimit: 0
-  softwareLimit: 0
+  hardware: 1
+  software: 1
+  ads: 1
+  servers: 1
+  hardwareLimit: 10
+  softwareLimit: 10
   money: 100
   price: 30
-  hardwarePPU: 0
-  softwarePPU: 0
-  adsPPU: 0
-  serversPPU: 0
-  priceLimit: 0
+  hardwarePPU: 5
+  softwarePPU: 5
+  adsPPU: 5
+  serversPPU: 5
+  priceLimit: 10000
   user_base: 0
   city: {fileID: 1142352795}
 --- !u!4 &1603429170

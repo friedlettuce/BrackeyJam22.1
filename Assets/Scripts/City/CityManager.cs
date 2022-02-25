@@ -28,7 +28,6 @@ public class CityManager : MonoBehaviour
     [SerializeField] private int population;
 
     [Header ("References")]
-    [SerializeField] private Inventory vr;
     [SerializeField] private Population popManager; 
 
     private void Awake(){
@@ -76,4 +75,5 @@ public class CityManager : MonoBehaviour
             ++spawnTimer;
         }
     }
+    public int GetPopulation(){ return population; }
 }

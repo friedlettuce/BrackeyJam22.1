@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class ConsumerMovement: MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private float speed;
     [SerializeField] private float waitTime;
+    private SpriteRenderer sprite;
     private bool walking;
-    private float happiness;
     private bool passDoor;
     private float rightSpawn;
     private float leftSpawn;
@@ -16,6 +15,8 @@ public class ConsumerMovement: MonoBehaviour
     private BoxCollider2D boxCollider;
     private Animator anim;
     private Vector3 originalScale;
+    private Population popManager;
+    private ConsumerHabit habit;
 
     private void Awake()
     {
@@ -27,6 +28,8 @@ public class ConsumerMovement: MonoBehaviour
         walking = true;
     }
     void Start(){
+        popManager = transform.parent.GetComponent<Population>();
+        habit = GetComponent<ConsumerHabit>();
         anim.SetBool("walking", walking);
     }
 
@@ -52,8 +55,20 @@ public class ConsumerMovement: MonoBehaviour
 
     private IEnumerator BuyVR(){
         float startTime = Time.time;
-        StartCoroutine(InStore());
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime/2);
+        
+        habit.SetHappiness();
+        if(popManager.WillBuy(habit.happiness)){
+            StartCoroutine(InStore());
+            // experience feedback
+            //if(0 > habit.happiness);
+        }
+        else{
+            // give feedback
+            Debug.Log((popManager.cprOrHappy(habit.happiness) ? "CPR" : "Happy") + "is lower");
+        }
+
+        yield return new WaitForSeconds(waitTime/2);
         anim.SetBool("walking", true);
         walking = true;
     }
@@ -64,7 +79,6 @@ public class ConsumerMovement: MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
-
     public void SetDirection(float _direction, float _leftSpawn, float _rightSpawn)
     {
         gameObject.SetActive(true);

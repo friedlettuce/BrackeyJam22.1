@@ -26,11 +26,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] CityManager city;
 
     private void Awake(){
-        //adsLimit = city.population;
+        adsLimit = city.GetPopulation() / 10;
     }
     public float costPriceRatio(){
         // multiply by prices, divide by lowest price
-        return hardware * hardwarePPU + software * softwarePPU / price;
+        return (hardware * hardwarePPU + software * softwarePPU) / price;
     }
     public float experience(){
         return 60;
