@@ -16,6 +16,13 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public void StartGame(){
+        GetComponentInChildren<MusicManager>().StartGame();
+    }
+    public void StopGame(){
+        GetComponentInChildren<MusicManager>().StopGame();
+    }
+
     public void PlaySound(AudioClip _clip){
         source.PlayOneShot(_clip);
     }

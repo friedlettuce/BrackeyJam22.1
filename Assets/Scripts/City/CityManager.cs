@@ -67,12 +67,13 @@ public class CityManager : MonoBehaviour
         background.color = Color.Lerp(nightColor, dayColor, hour > sunrise && hour < sunset ? t : 0.5f);
 
         // Spawns consumer
-        if(spawnTimer >= spawnTime){
-            popManager.SpawnConsumer();
-            spawnTimer = 0;
-        }
-        else{
-            ++spawnTimer;
+        if(hour >= startOfDay && hour < endOfDay){
+            if(spawnTimer >= spawnTime){
+                popManager.SpawnConsumer();
+                spawnTimer = 0;
+            }
+            else
+                ++spawnTimer;
         }
     }
     public int GetPopulation(){ return population; }
