@@ -64,8 +64,10 @@ public class ConsumerMovement: MonoBehaviour
             //if(0 > habit.happiness);
         }
         else{
-            // give feedback
-            Debug.Log((popManager.cprOrHappy(habit.happiness) ? "CPR" : "Happy") + "is lower");
+            if(popManager.SoftOrHard())
+                StartCoroutine(habit.LowSoftware());
+            else
+                StartCoroutine(habit.LowHardware());
         }
 
         yield return new WaitForSeconds(waitTime/2);

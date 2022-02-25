@@ -1031,7 +1031,7 @@ MonoBehaviour:
   minuteText: {fileID: 1055853206}
   dayColor: {r: 1, g: 1, b: 1, a: 1}
   nightColor: {r: 0, g: 0, b: 0, a: 1}
-  population: 100
+  population: 10
   popManager: {fileID: 429646980}
 --- !u!4 &1142352796
 Transform:

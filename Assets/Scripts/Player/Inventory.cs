@@ -41,4 +41,7 @@ public class Inventory : MonoBehaviour
     public float adsPercent(){
         return 1f;
     }
+    public bool SoftOrHard(){
+        return software / softwareLimit < hardware / hardwareLimit;
+    }
 }

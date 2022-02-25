@@ -51,8 +51,8 @@ public class Population : MonoBehaviour
         return Random.Range(1, 101) <= inventory.costPriceRatio() * cpBuyMult + (
             1 - _happiness / upperLimit) * happyBuyMult + inventory.adsRatio() * adsBuyMult;
     }
-    public bool cprOrHappy(float _happiness){
-        return inventory.costPriceRatio() / cpBuyMult < (1 - _happiness / upperLimit) / happyBuyMult;
+    public bool SoftOrHard(){
+        return inventory.SoftOrHard();
     }
     public bool Enjoyed(float experience, float _happiness){
         return experience > _happiness;
