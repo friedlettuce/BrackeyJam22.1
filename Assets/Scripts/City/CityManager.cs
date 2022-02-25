@@ -6,6 +6,9 @@ public class CityManager : MonoBehaviour
     [Header ("Time")]
     [SerializeField] private int startOfDay;
     [SerializeField] private int endOfDay;
+    private int openTime;
+    private int spawnTime;
+    private int spawnTimer;
     [SerializeField] private int sunrise;
     [SerializeField] private int sunset;
 
@@ -32,6 +35,16 @@ public class CityManager : MonoBehaviour
         day = 1;
         hour = 8;
         minute = 0;
+
+        openTime = (endOfDay - startOfDay) * 60;
+        if(population > openTime){
+            population = openTime;
+            spawnTime = 1;
+        }
+        else{
+            spawnTime = (int)(openTime / population);
+        }
+        spawnTimer = 0;
     }
     void Start(){
         popManager.SetPopulation(population / (endOfDay - startOfDay));
@@ -53,5 +66,14 @@ public class CityManager : MonoBehaviour
         minuteText.text = (minute < 10 ? " " : "") + minute.ToString();
         t = ((hour > 11 ? 23 - hour : hour) * 59 + (hour > 11 ? 59 - minute : minute)) / 708f;
         background.color = Color.Lerp(nightColor, dayColor, hour > sunrise && hour < sunset ? t : 0.5f);
+
+        // Spawns consumer
+        if(spawnTimer >= spawnTime){
+            popManager.SpawnConsumer();
+            spawnTimer = 0;
+        }
+        else{
+            ++spawnTimer;
+        }
     }
 }
