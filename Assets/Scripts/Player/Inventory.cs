@@ -41,6 +41,9 @@ public class Inventory : MonoBehaviour
         money += price;
         UpdateMoney();
     }
+    public void SetPrice(int _price){
+        price = _price;
+    }
     public float costPriceRatio(){
         // multiply by prices, divide by lowest price
         return (hardware * hardwarePPU + software * softwarePPU) / price;
