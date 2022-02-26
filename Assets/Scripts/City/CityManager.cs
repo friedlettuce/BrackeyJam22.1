@@ -101,7 +101,7 @@ public class CityManager : MonoBehaviour
     }
     public int GetPopulation(){ return population; }
 
-    public void UpdateSlider(Slider slider){
+    public void UpdateSlider(){
         return;
     }
 }

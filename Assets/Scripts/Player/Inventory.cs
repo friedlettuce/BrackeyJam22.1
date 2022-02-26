@@ -4,31 +4,28 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [Header ("Buisness Inventory")]
-    [SerializeField] private int hardware;
-    [SerializeField] private int software;
-    [SerializeField] private int ads;
-    [SerializeField] private int servers;
-    [SerializeField] private int hardwareLimit;
-    [SerializeField] private int softwareLimit;
-    private int adsLimit;
-    private int serversLimit;
+    [SerializeField] public int hardware;
+    [SerializeField] public int software;
+    [SerializeField] public int ads;
+    [SerializeField] public int servers;
+    [SerializeField] public int hardwareLimit;
+    [SerializeField] public int softwareLimit;
+    public int adsLimit;
+    public int serversLimit;
 
     [Header ("Money")]
-    [SerializeField] private int money;
-    [SerializeField] private int price;
-    [SerializeField] private Text moneyText;
+    [SerializeField] public int money;
+    [SerializeField] public int price;
+    [SerializeField] public Text moneyText;
     [Header ("Cost")]
-    [SerializeField] private int hardwarePPU;
-    [SerializeField] private int softwarePPU;
-    [SerializeField] private int adsPPU;
-    [SerializeField] private int serversPPU;
-    [SerializeField] private int priceLimit;
+    [SerializeField] public int hardwarePPU;
+    [SerializeField] public int softwarePPU;
+    [SerializeField] public int adsPPU;
+    [SerializeField] public int serversPPU;
+    [SerializeField] public int priceLimit;
     [Header ("Consumer Info")]
-    [SerializeField] private int user_base;
-    private HighScore highScore;
-
-    [Header ("Panel References")]
-    [SerializeField] private Slider softwareSlider;
+    [SerializeField] public int user_base;
+    public HighScore highScore;
 
     [Header ("Consumer Information")]
     [SerializeField] CityManager city;
@@ -62,5 +59,17 @@ public class Inventory : MonoBehaviour
     }
     public bool SoftOrHard(){
         return software / softwareLimit < hardware / hardwareLimit;
+    }
+    public void UpdateSoftware(int units){
+        software = units;
+    }
+    public void UpdateHardware(int units){
+        hardware = units;
+    }
+    public void UpdateServers(int units){
+        servers = units;
+    }
+    public void UpdateAds(int units){
+        ads = units;
     }
 }
