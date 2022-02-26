@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -12,21 +13,33 @@ public class Inventory : MonoBehaviour
     private int adsLimit;
     private int serversLimit;
 
-    [Header ("Costs and User Base")]
+    [Header ("Money")]
     [SerializeField] private int money;
     [SerializeField] private int price;
+    [SerializeField] private Text moneyText;
+    [Header ("Cost")]
     [SerializeField] private int hardwarePPU;
     [SerializeField] private int softwarePPU;
     [SerializeField] private int adsPPU;
     [SerializeField] private int serversPPU;
     [SerializeField] private int priceLimit;
+    [Header ("Consumer Info")]
     [SerializeField] private int user_base;
+    private HighScore highScore;
 
     [Header ("Consumer Information")]
     [SerializeField] CityManager city;
 
     private void Awake(){
         adsLimit = city.GetPopulation() / 10;
+        highScore = new HighScore();
+    }
+    private void UpdateMoney(){
+        moneyText.text = "$" + money.ToString();
+    }
+    public void Sold(){
+        money += price;
+        UpdateMoney();
     }
     public float costPriceRatio(){
         // multiply by prices, divide by lowest price

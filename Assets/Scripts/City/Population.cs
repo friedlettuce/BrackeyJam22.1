@@ -22,8 +22,10 @@ public class Population : MonoBehaviour
 
     [Header ("References")]
     [SerializeField] private Inventory inventory;
+    [SerializeField] private int called;
 
     public void SpawnConsumer(){
+        ++called;
         bool dir = Random.value >= 0.5f;
         int fc = FindConsumer();
 
@@ -53,6 +55,9 @@ public class Population : MonoBehaviour
     }
     public bool SoftOrHard(){
         return inventory.SoftOrHard();
+    }
+    public void Sold(){
+        inventory.Sold();
     }
     public bool Enjoyed(float experience, float _happiness){
         return experience > _happiness;

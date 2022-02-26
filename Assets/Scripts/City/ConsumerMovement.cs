@@ -60,6 +60,7 @@ public class ConsumerMovement: MonoBehaviour
         habit.SetHappiness();
         if(popManager.WillBuy(habit.happiness)){
             StartCoroutine(InStore());
+            popManager.Sold();
             // experience feedback
             //if(0 > habit.happiness);
         }

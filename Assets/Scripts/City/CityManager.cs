@@ -23,12 +23,14 @@ public class CityManager : MonoBehaviour
     private int hour;
     private int minute;
     private float t;
+    private bool transition;
 
     [Header ("Population")]
     [SerializeField] private int population;
 
     [Header ("References")]
     [SerializeField] private Population popManager; 
+    [SerializeField] private Button nextDayButton;
 
     private void Awake(){
         day = 1;
@@ -44,10 +46,19 @@ public class CityManager : MonoBehaviour
             spawnTime = (int)(openTime / population);
         }
         spawnTimer = 0;
+        transition = false;
     }
     void Start(){
         popManager.SetPopulation(population / (endOfDay - startOfDay));
-        InvokeRepeating(nameof(incrementTime), 1f, .1f);
+    }
+    private void StopDay(){
+        CancelInvoke();
+        transition = true;
+        InvokeRepeating(nameof(incrementTime), 0f, .01f);
+    }
+    public void NextDay(){
+        InvokeRepeating(nameof(incrementTime), 0f, .1f);
+        nextDayButton.gameObject.SetActive(false);
     }
     private void incrementTime(){
         if(minute++ >= 59){
@@ -57,6 +68,7 @@ public class CityManager : MonoBehaviour
         if(hour > 23){
             ++day;
             hour = 0;
+            popManager.incrementHappy();
         }
         
         // Displays time, Changes day color
@@ -67,13 +79,21 @@ public class CityManager : MonoBehaviour
         background.color = Color.Lerp(nightColor, dayColor, hour > sunrise && hour < sunset ? t : 0.5f);
 
         // Spawns consumer
-        if(hour >= startOfDay && hour < endOfDay){
+        if(!transition && hour >= startOfDay && hour < endOfDay){
             if(spawnTimer >= spawnTime){
                 popManager.SpawnConsumer();
                 spawnTimer = 0;
             }
             else
                 ++spawnTimer;
+        }
+        else if(hour > endOfDay && !transition){
+            StopDay();
+        }
+        else if(hour == startOfDay && transition){
+            transition = false;
+            CancelInvoke();
+            nextDayButton.gameObject.SetActive(true);
         }
     }
     public int GetPopulation(){ return population; }

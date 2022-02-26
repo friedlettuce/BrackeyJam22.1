@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27730d27fe1e85d40b251b02d87e10f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnLimit: 4
+  spawnLimit: 3
   lingerTime: 2
   softwarePrefab: {fileID: 4467428321018308995, guid: 5fef233edd8c10a4fab2dd2254110e61, type: 3}
   hardwarePrefab: {fileID: 5023158409708577978, guid: a7c52fb41967ce347946faab1d529bd6, type: 3}
