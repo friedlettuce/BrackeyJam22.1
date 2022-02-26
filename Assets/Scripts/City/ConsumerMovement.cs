@@ -61,6 +61,7 @@ public class ConsumerMovement: MonoBehaviour
         if(popManager.WillBuy(habit.happiness)){
             StartCoroutine(InStore());
             popManager.Sold();
+            anim.SetBool("bought", true);
             // experience feedback
             //if(0 > habit.happiness);
         }
@@ -100,7 +101,8 @@ public class ConsumerMovement: MonoBehaviour
     }
     void OnDisable(){
         transform.localScale = transform.parent.localScale;
-        transform.localScale = new Vector3(transform.localScale.x*2, transform.localScale.y*2, 1);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
+        anim.SetBool("bought", false);
     }
 
     private void Deactivate()

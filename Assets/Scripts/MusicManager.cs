@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] AudioSource source;
+    [SerializeField] AudioSource ambience;
     [SerializeField] AudioClip intro;
     [SerializeField] AudioClip full;
     [SerializeField] AudioClip loop;
@@ -18,10 +19,12 @@ public class MusicManager : MonoBehaviour
         source.clip = full;
         source.Play();
         Invoke(nameof(LoopMusic), source.clip.length);
+        ambience.Play();
     }
     public void StopGame()
     {
         CancelInvoke();
+        ambience.Stop();
         source.clip = intro;
         source.Play();
         Invoke(nameof(LoopMusic), source.clip.length);

@@ -27,6 +27,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int user_base;
     private HighScore highScore;
 
+    [Header ("Panel References")]
+    [SerializeField] private Slider softwareSlider;
+
     [Header ("Consumer Information")]
     [SerializeField] CityManager city;
 
@@ -45,7 +48,7 @@ public class Inventory : MonoBehaviour
         price = _price;
     }
     public float costPriceRatio(){
-        // multiply by prices, divide by lowest price
+        if(price <= 0) return hardware*hardwarePPU + software*softwarePPU / .1f;
         return (hardware * hardwarePPU + software * softwarePPU) / price;
     }
     public float experience(){

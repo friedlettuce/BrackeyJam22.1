@@ -29,7 +29,8 @@ public class CityManager : MonoBehaviour
     [SerializeField] private int population;
 
     [Header ("References")]
-    [SerializeField] private Population popManager; 
+    [SerializeField] private Population popManager;
+    [SerializeField] private GameObject inventoryPanel; 
     [SerializeField] private Button nextDayButton;
 
     private void Awake(){
@@ -49,7 +50,7 @@ public class CityManager : MonoBehaviour
         transition = false;
     }
     void Start(){
-        popManager.SetPopulation(population / (endOfDay - startOfDay));
+        popManager.SetPopulation(population, endOfDay - startOfDay);
     }
     private void StopDay(){
         CancelInvoke();
@@ -59,6 +60,7 @@ public class CityManager : MonoBehaviour
     public void NextDay(){
         InvokeRepeating(nameof(incrementTime), 0f, .1f);
         nextDayButton.gameObject.SetActive(false);
+        inventoryPanel.gameObject.SetActive(false);
     }
     private void incrementTime(){
         if(minute++ >= 59){
@@ -94,7 +96,12 @@ public class CityManager : MonoBehaviour
             transition = false;
             CancelInvoke();
             nextDayButton.gameObject.SetActive(true);
+            inventoryPanel.gameObject.SetActive(true);
         }
     }
     public int GetPopulation(){ return population; }
+
+    public void UpdateSlider(Slider slider){
+        return;
+    }
 }

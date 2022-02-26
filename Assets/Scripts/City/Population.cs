@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Population : MonoBehaviour
 {   
@@ -10,6 +11,7 @@ public class Population : MonoBehaviour
 
     [Header ("Happiness")]
     [SerializeField] private int happiness;
+    [SerializeField] private Text happyText;
     [SerializeField] private int personalRange;
     [SerializeField] private int range;
     [SerializeField] private int lowerLimit;
@@ -45,6 +47,7 @@ public class Population : MonoBehaviour
     }
     public void incrementHappy(){
         happiness = Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
+        happyText.text = "City Happiness: " + happiness.ToString();
     }
     public float HappyValue(){
         return Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
@@ -62,12 +65,12 @@ public class Population : MonoBehaviour
     public bool Enjoyed(float experience, float _happiness){
         return experience > _happiness;
     }
-    public void SetPopulation(int population){
-        population += 5;
+    public void SetPopulation(int population, int time){
         if(population < 0) population = 0;
+        if(time <= 0) time = 1;
 
-        consumers = new GameObject[population];
-        for(int i = 0; i < population; ++i){
+        consumers = new GameObject[population / time + population / 10];
+        for(int i = 0; i < consumers.Length; ++i){
             consumers[i] = (GameObject)Instantiate(
                 consumerPrefab, new Vector3(0, leftSpawn.position.y, 0), Quaternion.identity);
             consumers[i].transform.parent = transform;
