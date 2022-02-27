@@ -8,6 +8,7 @@ public class ConsumerHabit : MonoBehaviour
     [SerializeField] private int lingerTime;
     [SerializeField] private GameObject softwarePrefab;
     [SerializeField] private GameObject hardwarePrefab;
+    [SerializeField] private GameObject serverPrefab;
     [SerializeField] private GameObject reaction;
     public float happiness { get; private set; }
 
@@ -19,6 +20,13 @@ public class ConsumerHabit : MonoBehaviour
         Destroy(reaction);
     }
     public IEnumerator LowHardware(){
+        yield return new WaitForSeconds(Random.Range(0, spawnLimit));
+        reaction = Instantiate(hardwarePrefab, new Vector3(
+            transform.position.x, transform.position.y + .8f, 1), Quaternion.identity);
+        yield return new WaitForSeconds(lingerTime);
+        Destroy(reaction);
+    }
+    public IEnumerator LowServers(){
         yield return new WaitForSeconds(Random.Range(0, spawnLimit));
         reaction = Instantiate(hardwarePrefab, new Vector3(
             transform.position.x, transform.position.y + .8f, 1), Quaternion.identity);

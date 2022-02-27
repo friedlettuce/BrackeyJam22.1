@@ -4819,7 +4819,7 @@ MonoBehaviour:
   sunset: 18
   daySpeed: 0.05
   nightSpeed: 0.01
-  background: {fileID: 0}
+  background: {fileID: 1675575011}
   dayText: {fileID: 2047449931}
   hourText: {fileID: 827525984}
   minuteText: {fileID: 1055853206}

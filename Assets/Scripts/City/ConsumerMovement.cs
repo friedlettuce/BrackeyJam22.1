@@ -64,6 +64,9 @@ public class ConsumerMovement: MonoBehaviour
             popManager.NewUser();
             StartCoroutine(InStore());
         }
+        else if(!popManager.Vacancy()){
+            StartCoroutine(habit.LowServers());
+        }
         else{
             if(popManager.SoftOrHard())
                 StartCoroutine(habit.LowSoftware());
