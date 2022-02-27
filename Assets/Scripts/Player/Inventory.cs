@@ -39,12 +39,13 @@ public class Inventory : MonoBehaviour
 
     [Header ("Audio Clips")]
     [SerializeField] private AudioClip ggClip;
+    public int ServersWillBuy;
 
     private void Awake(){
         adsLimit = city.GetPopulation() / 10;
         highScore = new HighScore();
         user_base = 0;
-        serverDiff = 1;
+        ServersWillBuy = 0;
     }
     public void PricePanel(){
         serverDiff = 0;
@@ -54,11 +55,11 @@ public class Inventory : MonoBehaviour
         popManager.SetUsers(user_base);
     }
     public void PurchaseInventory(){
-        money -= hardware*hardwarePPU + software*softwarePPU + ads*adsPPU + serversPPU*serverDiff;
+        money -= hardware*hardwarePPU + software*softwarePPU + ads*adsPPU + serversPPU*ServersWillBuy;
         UpdateMoney();
     }
     private void UpdateMoney(){
-        moneyText.text = "$" + money.ToString();
+        moneyText.text = money.ToString();
         if(money <= 0){
             SoundManager.instance.PlaySound(ggClip);
             city.Gameover();
@@ -98,14 +99,14 @@ public class Inventory : MonoBehaviour
     public void UpdateHardware(int units){
         hardware = units;
     }
-    public void UpdateServers(int units){
-        servers = units;
+    public void UpdateServers(){
+        servers += ServersWillBuy;
     }
     public void UpdateAds(int units){
         ads = units;
     }
     public float totalCost(){
-        return software * softwarePPU + hardware * hardwarePPU + serverDiff * serversPPU + ads * adsPPU;
+        return software * softwarePPU + hardware * hardwarePPU + ServersWillBuy * serversPPU + ads * adsPPU;
     }
     public int MaxSWInc(){
         return (int)((money - (totalCost() - (software * softwarePPU))) / softwarePPU);
@@ -113,9 +114,8 @@ public class Inventory : MonoBehaviour
     public int MaxHWInc(){
         return (int)((money - (totalCost() - (hardware * hardwarePPU))) / hardwarePPU);
     }
-    public int MaxSVRInc(int _serverDiff){
-        serverDiff = _serverDiff;
-        return (int)((money - (totalCost() - (serverDiff * serversPPU))) / serversPPU);
+    public int SvrToBuy(){
+        return (int)(money - totalCost()) / serversPPU;
     }
     public int MaxAdInc(){
         return (int)((money - (totalCost() - (ads * adsPPU))) / adsPPU);

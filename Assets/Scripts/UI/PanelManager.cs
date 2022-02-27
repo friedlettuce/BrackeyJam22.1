@@ -40,6 +40,7 @@ public class PanelManager : MonoBehaviour
         iv = GetComponent<Inventory>();
     }
     private void Start(){
+        Debug.Log("starting panel");
         swSlider.wholeNumbers = true;
         hwSlider.wholeNumbers = true;
         svrSlider.wholeNumbers = true;
@@ -70,12 +71,18 @@ public class PanelManager : MonoBehaviour
         adMaxPPU.text = iv.adsLimit.ToString();
 
         UpdateIngredients();
+        svrUnits.text = svrSlider.value.ToString();
+        iv.serverDiff = 1;
+        iv.UpdateServers();
+        svrCost.text = "   " + (iv.servers * iv.serversPPU).ToString();
+        totalCost.text = "     " + iv.totalCost();
+        SoundManager.instance.PlaySound(itemClip);
     }
     public void UpdateIngredients(){
-        UpdateAds();
         UpdateHardware();
-        UpdateServers();
         UpdateSoftware(); // think about priority (what needs atleast 1 to run)
+        UpdateServers();
+        UpdateAds();
         totalCost.text = "     " + iv.totalCost();
     }
     public void UpdateSoftware(){
@@ -95,11 +102,14 @@ public class PanelManager : MonoBehaviour
         SoundManager.instance.PlaySound(itemClip);
     }
     public void UpdateServers(){
-        if(svrSlider.value > iv.MaxSVRInc((int)svrSlider.value)) 
-            svrSlider.value = iv.MaxSVRInc((int)svrSlider.value);
+        if((int)svrSlider.value == iv.servers) return;
+        int diff = (int)svrSlider.value - iv.serverDiff;
+        if(diff > iv.SvrToBuy()) return;
+        iv.ServersWillBuy += diff;
         svrUnits.text = svrSlider.value.ToString();
-        iv.UpdateServers(Int32.Parse(svrUnits.text));
-        svrCost.text = "   " + (iv.servers * iv.serversPPU).ToString();
+        iv.UpdateServers();
+        Debug.Log("TC: " + (int)iv.totalCost());
+        svrCost.text = "   " + (iv.ServersWillBuy * iv.serversPPU).ToString();
         totalCost.text = "     " + iv.totalCost();
         SoundManager.instance.PlaySound(itemClip);
     }

@@ -35,6 +35,7 @@ public class CityManager : MonoBehaviour
     [Header ("References")]
     [SerializeField] private Population popManager;
     [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private PanelManager inventoryManager;
     [SerializeField] private Inventory iv;
     [Header ("GameOver")]
     [SerializeField] private GameObject gameOver;
@@ -74,6 +75,7 @@ public class CityManager : MonoBehaviour
         InvokeRepeating(nameof(incrementTime), 0f, daySpeed);
         inventoryPanel.gameObject.SetActive(false);
         iv.PurchaseInventory();
+
     }
     public void Gameover(){
         CancelInvoke();
@@ -121,10 +123,12 @@ public class CityManager : MonoBehaviour
             StopDay();
         }
         else if(hour == startOfDay && transition){
+            // Brings up inventory panel
             transition = false;
             CancelInvoke();
             inventoryPanel.gameObject.SetActive(true);
             iv.PricePanel();
+            inventoryManager.UpdateIngredients();
         }
     }
     public int GetPopulation(){ return population; }
