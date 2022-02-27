@@ -58,12 +58,11 @@ public class ConsumerMovement: MonoBehaviour
         yield return new WaitForSeconds(waitTime/2);
         
         habit.SetHappiness();
-        if(popManager.WillBuy(habit.happiness)){
-            StartCoroutine(InStore());
+        if(popManager.WillBuy(habit.happiness) && popManager.Vacancy()){
             popManager.Sold();
             anim.SetBool("bought", true);
-            // experience feedback
-            //if(0 > habit.happiness);
+            popManager.NewUser();
+            StartCoroutine(InStore());
         }
         else{
             if(popManager.SoftOrHard())

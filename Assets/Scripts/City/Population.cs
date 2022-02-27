@@ -25,6 +25,8 @@ public class Population : MonoBehaviour
     [Header ("References")]
     [SerializeField] private Inventory inventory;
     [SerializeField] private int called;
+    [SerializeField] private Text userText;
+    public int users;
 
     public void SpawnConsumer(){
         ++called;
@@ -77,4 +79,13 @@ public class Population : MonoBehaviour
             consumers[i].SetActive(false);
         }
     }
+    public void NewUser(){
+        inventory.NewPurchase(++users);
+        userText.text = "Users: " + users.ToString();
+    }
+    public void SetUsers(int _users){
+        users = _users;
+        userText.text = "Users: " + users.ToString();
+    }
+    public bool Vacancy(){ return inventory.Vacancy(); }
 }

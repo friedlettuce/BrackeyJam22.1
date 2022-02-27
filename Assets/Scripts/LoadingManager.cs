@@ -5,7 +5,7 @@ public class LoadingManager : MonoBehaviour
 {
     [SerializeField] SoundManager sound;
     public static LoadingManager instance { get; private set; }
-    private float highscore;
+    public float highscore;
 
     private void Awake()
     {

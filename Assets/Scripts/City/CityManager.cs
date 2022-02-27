@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CityManager : MonoBehaviour
 {
     [Header ("Time")]
+    [SerializeField] private int days;
     [SerializeField] private int startOfDay;
     [SerializeField] private int endOfDay;
     private int openTime;
@@ -30,8 +32,12 @@ public class CityManager : MonoBehaviour
 
     [Header ("References")]
     [SerializeField] private Population popManager;
-    [SerializeField] private GameObject inventoryPanel; 
-    [SerializeField] private Button nextDayButton;
+    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private Inventory iv;
+    [Header ("GameOver")]
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private TextMeshProUGUI msg;
+    [SerializeField] private Slider priceSlider;
 
     private void Awake(){
         day = 1;
@@ -51,16 +57,32 @@ public class CityManager : MonoBehaviour
     }
     void Start(){
         popManager.SetPopulation(population, endOfDay - startOfDay);
+        gameOver.SetActive(false);
     }
     private void StopDay(){
         CancelInvoke();
         transition = true;
+        iv.MaintainServers();
         InvokeRepeating(nameof(incrementTime), 0f, .01f);
     }
     public void NextDay(){
         InvokeRepeating(nameof(incrementTime), 0f, .1f);
-        nextDayButton.gameObject.SetActive(false);
         inventoryPanel.gameObject.SetActive(false);
+        iv.PurchaseInventory();
+    }
+    public void Gameover(){
+        CancelInvoke();
+        popManager.enabled = false;
+        priceSlider.interactable = false;
+        int score = iv.user_base * 1000 + iv.money;
+        msg.text = "Game Over\n\nThanks for playing!\nHighscore: " + score.ToString();
+        if(LoadingManager.instance.highscore < score)
+            LoadingManager.instance.highscore = score;
+        inventoryPanel.SetActive(false);
+        gameOver.SetActive(true);
+    }
+    public void ReturnToMenu(){
+        LoadingManager.instance.TitleScreen();
     }
     private void incrementTime(){
         if(minute++ >= 59){
@@ -69,6 +91,7 @@ public class CityManager : MonoBehaviour
         }
         if(hour > 23){
             ++day;
+            if(day > days) Gameover();
             hour = 0;
             popManager.incrementHappy();
         }
@@ -95,13 +118,9 @@ public class CityManager : MonoBehaviour
         else if(hour == startOfDay && transition){
             transition = false;
             CancelInvoke();
-            nextDayButton.gameObject.SetActive(true);
             inventoryPanel.gameObject.SetActive(true);
+            iv.PricePanel();
         }
     }
     public int GetPopulation(){ return population; }
-
-    public void UpdateSlider(){
-        return;
-    }
 }
