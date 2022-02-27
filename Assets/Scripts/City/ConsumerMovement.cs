@@ -30,7 +30,8 @@ public class ConsumerMovement: MonoBehaviour
     void Start(){
         popManager = transform.parent.GetComponent<Population>();
         habit = GetComponent<ConsumerHabit>();
-        anim.SetBool("walking", walking);
+        anim.SetBool("walking", true);
+        anim.SetBool("bought", false);
     }
 
     private void Update()
@@ -100,6 +101,7 @@ public class ConsumerMovement: MonoBehaviour
             Mathf.Abs(transform.localScale.x)*direction, transform.localScale.y, transform.localScale.z);
 
         anim.SetBool("walking", true);
+        anim.SetBool("bought", false);
     }
     void OnDisable(){
         transform.localScale = transform.parent.localScale;
