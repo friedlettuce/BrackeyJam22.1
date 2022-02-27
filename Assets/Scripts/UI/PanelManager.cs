@@ -65,25 +65,38 @@ public class PanelManager : MonoBehaviour
         adSlider.maxValue = iv.adsLimit;
         adMaxPPU.text = iv.adsLimit.ToString();
 
-        UpdateSoftware();
+        UpdateIngredients();
+    }
+    public void UpdateIngredients(){
+        UpdateAds();
         UpdateHardware();
         UpdateServers();
-        UpdateAds();
+        UpdateSoftware(); // think about priority (what needs atleast 1 to run)
+        totalCost.text = "Total Cost: $" + iv.totalCost();
     }
     public void UpdateSoftware(){
+        if(swSlider.value > iv.MaxSWInc()) swSlider.value = iv.MaxSWInc();
         swUnits.text = swSlider.value.ToString();
         iv.UpdateSoftware(Int32.Parse(swUnits.text));
+        swCost.text = "$" + (iv.software * iv.softwarePPU).ToString();
     }
     public void UpdateHardware(){
+        if(hwSlider.value > iv.MaxHWInc()) hwSlider.value = iv.MaxHWInc();
         hwUnits.text = hwSlider.value.ToString();
         iv.UpdateHardware(Int32.Parse(hwUnits.text));
+        hwCost.text = "$" + (iv.hardware * iv.hardwarePPU).ToString();
     }
     public void UpdateServers(){
+        if(svrSlider.value > iv.MaxSVRInc((int)svrSlider.value)) 
+            svrSlider.value = iv.MaxSVRInc((int)svrSlider.value);
         svrUnits.text = svrSlider.value.ToString();
         iv.UpdateServers(Int32.Parse(svrUnits.text));
+        svrCost.text = "$" + (iv.servers * iv.serversPPU).ToString();
     }
     public void UpdateAds(){
+        if(adSlider.value > iv.MaxAdInc()) adSlider.value = iv.MaxAdInc();
         adUnits.text = adSlider.value.ToString();
         iv.UpdateAds(Int32.Parse(adUnits.text));
+        adCost.text = "$" + (iv.ads * iv.adsPPU).ToString();
     }
 }
