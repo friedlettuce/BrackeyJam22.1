@@ -40,6 +40,8 @@ public class CityManager : MonoBehaviour
     [SerializeField] private GameObject gameOver;
     [SerializeField] private TextMeshProUGUI msg;
     [SerializeField] private Slider priceSlider;
+    [Header ("AudioClips")]
+    [SerializeField] private AudioClip eodClip;
 
     private void Awake(){
         day = 1;
@@ -66,6 +68,7 @@ public class CityManager : MonoBehaviour
         transition = true;
         iv.MaintainServers();
         InvokeRepeating(nameof(incrementTime), 0f, nightSpeed);
+        SoundManager.instance.PlaySound(eodClip);
     }
     public void NextDay(){
         InvokeRepeating(nameof(incrementTime), 0f, daySpeed);

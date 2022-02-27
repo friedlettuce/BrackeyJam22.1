@@ -37,6 +37,9 @@ public class Inventory : MonoBehaviour
     [Header ("References")]
     [SerializeField] private Population popManager;
 
+    [Header ("Audio Clips")]
+    [SerializeField] private AudioClip ggClip;
+
     private void Awake(){
         adsLimit = city.GetPopulation() / 10;
         highScore = new HighScore();
@@ -56,7 +59,10 @@ public class Inventory : MonoBehaviour
     }
     private void UpdateMoney(){
         moneyText.text = "$" + money.ToString();
-        if(money <= 0) city.Gameover();
+        if(money <= 0){
+            SoundManager.instance.PlaySound(ggClip);
+            city.Gameover();
+        }
     }
     public void MaintainServers(){
         money -= servers*maintenance;

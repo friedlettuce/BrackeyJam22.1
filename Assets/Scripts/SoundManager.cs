@@ -4,6 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance { get; private set; }
     private AudioSource source;
+    [SerializeField] private AudioClip startClip;
 
     private void Awake(){
         source = GetComponent<AudioSource>();
@@ -17,6 +18,7 @@ public class SoundManager : MonoBehaviour
     }
 
     public void StartGame(){
+        PlaySound(startClip);
         GetComponentInChildren<MusicManager>().StartGame();
     }
     public void StopGame(){
