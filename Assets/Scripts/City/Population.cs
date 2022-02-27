@@ -81,11 +81,11 @@ public class Population : MonoBehaviour
     }
     public void NewUser(){
         inventory.NewPurchase(++users);
-        userText.text = "Users: " + users.ToString();
+        userText.text = "\t\t" + users.ToString();
     }
     public void SetUsers(int _users){
         users = _users;
-        userText.text = "Users: " + users.ToString();
+        userText.text = "\t\t" + users.ToString();
     }
     public bool Vacancy(){ return inventory.Vacancy(); }
 }

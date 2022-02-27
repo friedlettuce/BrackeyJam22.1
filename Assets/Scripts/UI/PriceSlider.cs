@@ -15,6 +15,6 @@ public class PriceSlider : MonoBehaviour
 
     public void SetPrice(){
         inventory.SetPrice((int)priceSlider.value);
-        priceText.text = "Price: $" + priceSlider.value.ToString();
+        priceText.text = "Price:\t" + priceSlider.value.ToString();
     }
 }
