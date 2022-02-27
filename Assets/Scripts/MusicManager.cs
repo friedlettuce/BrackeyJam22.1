@@ -9,6 +9,12 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioClip intro;
     [SerializeField] AudioClip full;
     [SerializeField] AudioClip loop;
+    [SerializeField] AudioClip gIntro;
+    [SerializeField] AudioClip gFull;
+    [SerializeField] AudioClip gLoop;
+    [SerializeField] AudioClip vintro;
+    [SerializeField] AudioClip vfull;
+    [SerializeField] AudioClip vloop;
  
     private void Awake(){
         Invoke(nameof(LoopMusic), source.clip.length);
@@ -16,9 +22,10 @@ public class MusicManager : MonoBehaviour
     public void StartGame()
     {
         CancelInvoke();
-        source.clip = full;
+        source.clip = gFull;
+        source.loop = false;
         source.Play();
-        Invoke(nameof(LoopMusic), source.clip.length);
+        Invoke(nameof(LoopGameplay), source.clip.length);
         ambience.Play();
     }
     public void StopGame()
@@ -26,11 +33,28 @@ public class MusicManager : MonoBehaviour
         CancelInvoke();
         ambience.Stop();
         source.clip = intro;
+        source.loop = false;
         source.Play();
         Invoke(nameof(LoopMusic), source.clip.length);
     }
     void LoopMusic(){
         source.clip = loop;
+        source.loop = true;
+        source.Play();
+    }
+    void LoopGameplay(){
+        source.clip = gLoop;
+        source.loop = true;
+        source.Play();
+    }
+    public void WinMusic(){
+        source.clip = vfull;
+        source.loop = false;
+        source.Play();
+        Invoke(nameof(WinLoop), source.clip.length);
+    }
+    public void WinLoop(){
+        source.clip = vloop;
         source.loop = true;
         source.Play();
     }
