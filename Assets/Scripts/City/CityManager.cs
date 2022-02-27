@@ -13,6 +13,8 @@ public class CityManager : MonoBehaviour
     private int spawnTimer;
     [SerializeField] private int sunrise;
     [SerializeField] private int sunset;
+    [SerializeField] private float daySpeed;
+    [SerializeField] private float nightSpeed;
 
     [Header ("Time Display")]
     [SerializeField] private SpriteRenderer background;
@@ -63,10 +65,10 @@ public class CityManager : MonoBehaviour
         CancelInvoke();
         transition = true;
         iv.MaintainServers();
-        InvokeRepeating(nameof(incrementTime), 0f, .01f);
+        InvokeRepeating(nameof(incrementTime), 0f, nightSpeed);
     }
     public void NextDay(){
-        InvokeRepeating(nameof(incrementTime), 0f, .1f);
+        InvokeRepeating(nameof(incrementTime), 0f, daySpeed);
         inventoryPanel.gameObject.SetActive(false);
         iv.PurchaseInventory();
     }
