@@ -49,7 +49,7 @@ public class Population : MonoBehaviour
     }
     public void incrementHappy(){
         happiness = Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);
-        happyText.text = "City Happiness: " + happiness.ToString();
+        happyText.text = "City Happy: " + happiness.ToString();
     }
     public float HappyValue(){
         return Mathf.Clamp(Random.Range(happiness - range, happiness + range), lowerLimit, upperLimit);

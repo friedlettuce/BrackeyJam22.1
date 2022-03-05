@@ -40,7 +40,6 @@ public class PanelManager : MonoBehaviour
         iv = GetComponent<Inventory>();
     }
     private void Start(){
-        Debug.Log("starting panel");
         swSlider.wholeNumbers = true;
         hwSlider.wholeNumbers = true;
         svrSlider.wholeNumbers = true;
